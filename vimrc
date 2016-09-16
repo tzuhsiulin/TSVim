@@ -13,7 +13,6 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Shougo/neocomplete'
 Bundle 'bling/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'majutsushi/tagbar.git'
@@ -24,13 +23,67 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
 Plugin 'MattesGroeger/vim-bookmarks'
 
-autocmd BufWritePre * :%s/\s\+$//e
+" autocmd BufWritePre * :%s/\s\+$//e
 
-filetype plugin indent on     " required!
-filetype plugin on
-filetype on
+" General
+set hlsearch      
+set encoding=utf-8
+set showtabline=2
+set tabstop=2                     " a tab is two spaces
+set shiftwidth=2                  " number of spaces to use for
+set backspace=indent,eol,start 		" allow backspacing over everything in insert mode
+set copyindent                    " copy the previous indentation on
+set foldmethod=indent
+set title                         " change the terminal's title
+set ttyfast
+set undolevels=1000               " use many muchos levels of undo
+set history=1000                  " remember more commands and search history
+set nopaste
+set incsearch
+set ignorecase                    " ignore case when searching
+" set hidden
 
-"======Solarized theme============
+" Other
+set noerrorbells                  " don't beep
+set nowrap                        " don't wrap lines
+set number                        " always show line numbers
+set ruler
+set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
+set showcmd
+set showmatch                     " set show matching parenthesis
+set smartcase                     " ignore case if search pattern is all lowercase,
+set smarttab                      " insert tabs on the
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set visualbell           " don't beep
+set wildignore=*.swp,*.bak,*.pyc,*.class
+" set mouse=a
+" set noai
+" set expandtab
+" set laststatus=2
+
+" Folding
+set foldmethod=syntax
+set foldlevel=99                  " folding
+
+" Indent 
+set autoindent
+set smartindent
+
+" Cursor
+set cursorline
+set cursorcolumn
+autocmd InsertEnter * highlight CursorColumn ctermfg=White ctermbg=Gray cterm=bold guifg=white guibg=yellow gui=bold
+autocmd InsertLeave * highlight CursorColumn ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+
+" copy to clipboard
+set clipboard=unnamed
+
+" Heightlight the result of search 
+set hls
+
+" Solarized theme
 syntax on
 syntax enable
 let g:solarized_termtrans = 1
@@ -38,48 +91,6 @@ set background=dark
 set t_Co=256
 let g:solarized_termcolors=256
 colorscheme solarized
-
-
-" ===========sontek.net============
-set encoding=utf-8
-set autoindent    " always set autoindenting on
-set backspace=indent,eol,start 		" allow backspacing over everything in insert mode
-set copyindent    " copy the previous indentation on
-set cursorline
-" set cursorcolumn
-set foldlevel=99    "folding"
-set foldmethod=indent
-set hidden
-set history=1000         " remember more commands and search history
-set hlsearch      "
-set ignorecase    " ignore case when searching
-set incsearch     "
-set noerrorbells         " don't beep
-set nowrap        " don't wrap lines
-set number        " always show line numbers
-set ruler
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set showcmd
-set showmatch     " set show matching parenthesis
-set smartcase     " ignore case if search pattern is all lowercase,
-set smarttab      " insert tabs on the
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set tabstop=2     " a tab is two spaces
-set showtabline=2
-set title                " change the terminal's title
-set ttyfast
-set undolevels=1000      " use many muchos levels of undo
-set visualbell           " don't beep
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set mouse=a
-set hidden
-set nopaste
-set noai
-set expandtab
-set laststatus=2
-set shiftwidth=2  " number of spaces to use for
 
 " ESLINT
 set statusline+=%#warningmsg#
@@ -94,26 +105,26 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint'
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
+" NERDTree
+let NERDTreeWinPos="right"
+
+" Other
 let g:airline#extensions#tabline#enabled = 1
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_vim_configuration = 1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:vim_markdown_folding_disabled=1
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let mapleader=","
 let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 " let NERDTreeShowBookmarks=1
-let NERDTreeWinPos="right"
 let g:indentLine_color_term = 239
-
 
 autocmd BufWinEnter * NERDTreeMirror
 " autocmd VimEnter * NERDTree
 " " autocmd FileType  python setlocal textwidth=79
 
+inoremap <C-C> <Esc>
 nnoremap <F6> :SyntasticCheck<CR>
 nnoremap <F5> :SyntasticToggleMode<CR>
 nnoremap <C-h>  :tabfirst<CR>
